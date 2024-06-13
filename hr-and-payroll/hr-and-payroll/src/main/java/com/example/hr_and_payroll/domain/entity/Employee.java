@@ -3,6 +3,8 @@ package com.example.hr_and_payroll.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +24,9 @@ public class Employee extends BaseDomain{
     private String designation;
     @Column(name = "salary")
     private Double salary;
+    @OneToMany(mappedBy="employees")
+    private Set<Employee> employees;
+
 
     public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary) {
         this.id = id;
