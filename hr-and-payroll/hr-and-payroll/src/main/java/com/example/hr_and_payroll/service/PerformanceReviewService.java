@@ -1,9 +1,15 @@
 package com.example.hr_and_payroll.service;
 
+import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
-import com.example.hr_and_payroll.domain.entity.PerformanceReview;
+
+import java.util.List;
 
 public interface PerformanceReviewService {
     PerformanceReviewDTO createPerformanceReview(PerformanceReviewDTO performanceReviewDTO);
+    PerformanceReviewDTO getPerformanceReviewById(Integer performanceReviewId);
+    List<PerformanceReviewDTO> getAllPerformanceReview();
+    PerformanceReviewDTO updatePerformanceReview(Integer performanceReviewId, PerformanceReviewDTO updatedPerformanceReview);
+    void deletePerformanceReview(Integer performanceReviewId);
 
 }

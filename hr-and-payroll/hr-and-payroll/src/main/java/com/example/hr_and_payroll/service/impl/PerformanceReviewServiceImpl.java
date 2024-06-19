@@ -1,12 +1,18 @@
 package com.example.hr_and_payroll.service.impl;
 
+import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
 import com.example.hr_and_payroll.domain.entity.PerformanceReview;
+import com.example.hr_and_payroll.exception.ResourceNotFoundException;
+import com.example.hr_and_payroll.mapper.EmployeeMapper;
 import com.example.hr_and_payroll.mapper.PerformanceReviewMapper;
 import com.example.hr_and_payroll.repository.PerformanceReviewRepository;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,4 +25,41 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
         PerformanceReview savedPerformanceReview = performanceReviewRepository.save(performanceReview);
         return PerformanceReviewMapper.mapToPerformanceReviewDto(savedPerformanceReview);
     }
+
+    @Override
+    public PerformanceReviewDTO getPerformanceReviewById(Integer performanceReviewId) {
+        PerformanceReview performanceReview = performanceReviewRepository.findById(performanceReviewId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee is not exist with given id: " + performanceReviewId));
+        return PerformanceReviewMapper.mapToPerformanceReviewDto(performanceReview);
+    }
+
+    @Override
+    public List<PerformanceReviewDTO> getAllPerformanceReview() {
+        List<PerformanceReview> performanceReview = performanceReviewRepository.findAll();
+        return performanceReview.stream().map((performanceReviews) -> PerformanceReviewMapper.mapToPerformanceReviewDto(performanceReviews))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public PerformanceReviewDTO updatePerformanceReview(Integer performanceReviewId, PerformanceReviewDTO updatedPerformanceReview) {
+        PerformanceReview performanceReview = performanceReviewRepository.findById(performanceReviewId).orElseThrow(
+                () -> new ResourceNotFoundException("Performance Review is not exist with given id: " + performanceReviewId)
+        );
+        performanceReview.setReviewDate(updatedPerformanceReview.getReviewDate());
+        performanceReview.setComments(updatedPerformanceReview.getComments());
+        performanceReview.setRating(updatedPerformanceReview.getRating());
+
+        PerformanceReview updatedPerformanceReviewObj = performanceReviewRepository.save(performanceReview);
+
+        return PerformanceReviewMapper.mapToPerformanceReviewDto(updatedPerformanceReviewObj);
+    }
+
+    @Override
+    public void deletePerformanceReview(Integer performanceReviewId) {
+            PerformanceReview performanceReview = performanceReviewRepository.findById(performanceReviewId).orElseThrow(
+                    () -> new ResourceNotFoundException("Performance Review is not exist with given id: " + performanceReviewId)
+            );
+            performanceReviewRepository.deleteById(performanceReviewId);
+    }
+
 }

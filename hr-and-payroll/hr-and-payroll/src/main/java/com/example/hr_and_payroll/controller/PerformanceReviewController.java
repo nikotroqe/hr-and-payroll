@@ -1,15 +1,15 @@
 package com.example.hr_and_payroll.controller;
 
+import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
 import com.example.hr_and_payroll.domain.entity.PerformanceReview;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/performance_review")
@@ -17,10 +17,35 @@ public class PerformanceReviewController {
     @Autowired
     private PerformanceReviewService performanceReviewService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<PerformanceReviewDTO> createPerformanceReview(@RequestBody PerformanceReviewDTO performanceReviewDTO){
         PerformanceReviewDTO savedPerformanceReview = performanceReviewService.createPerformanceReview(performanceReviewDTO);
         return new ResponseEntity<>(savedPerformanceReview, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PerformanceReviewDTO> getPerformanceReviewById(@PathVariable("id") Integer performanceReviewId){
+        PerformanceReviewDTO performanceReviewDTO = performanceReviewService.getPerformanceReviewById(performanceReviewId);
+        return ResponseEntity.ok(performanceReviewDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PerformanceReviewDTO>> getAllPerformanceReview(){
+        List<PerformanceReviewDTO> performanceReview = performanceReviewService.getAllPerformanceReview();
+        return ResponseEntity.ok(performanceReview);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PerformanceReviewDTO> updatePerformanceReview(@PathVariable("id") Integer performanceReviewId,
+                                                      @RequestBody PerformanceReviewDTO updatedPerformanceReview){
+        PerformanceReviewDTO performanceReviewDTO = performanceReviewService.updatePerformanceReview(performanceReviewId, updatedPerformanceReview);
+        return ResponseEntity.ok(performanceReviewDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePerformanceReview(@PathVariable("id") Integer performanceReviewId){
+        performanceReviewService.deletePerformanceReview(performanceReviewId);
+        return ResponseEntity.ok("Performance Review deleted successfully!.");
     }
 
 }
