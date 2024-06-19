@@ -3,6 +3,7 @@ package com.example.hr_and_payroll.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -39,4 +40,6 @@ public class Employee extends  BaseDomain {
         this.designation = designation;
         this.salary = salary;
     }
+
+
 }

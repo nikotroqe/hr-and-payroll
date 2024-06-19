@@ -1,5 +1,6 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,10 +16,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "performance_reviews")
+@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 public class PerformanceReview  extends  BaseDomain {
-
-
-
 
     @Column(name = "review_date", nullable = false)
     private LocalDate reviewDate;
@@ -31,6 +30,9 @@ public class PerformanceReview  extends  BaseDomain {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-
-
+    public PerformanceReview(LocalDate reviewDate, String comments, Integer rating) {
+        this.reviewDate = reviewDate;
+        this.comments = comments;
+        this.rating = rating;
+    }
 }
