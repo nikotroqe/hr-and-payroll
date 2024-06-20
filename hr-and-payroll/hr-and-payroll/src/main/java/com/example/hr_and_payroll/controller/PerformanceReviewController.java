@@ -1,8 +1,6 @@
 package com.example.hr_and_payroll.controller;
 
-import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
-import com.example.hr_and_payroll.domain.entity.PerformanceReview;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/performance_review")
+@RequestMapping("/api/performance-review")
 public class PerformanceReviewController {
     @Autowired
     private PerformanceReviewService performanceReviewService;

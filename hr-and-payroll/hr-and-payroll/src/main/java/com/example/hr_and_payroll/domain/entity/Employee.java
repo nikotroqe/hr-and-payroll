@@ -3,9 +3,7 @@ package com.example.hr_and_payroll.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -30,6 +28,10 @@ public class Employee extends  BaseDomain {
 
     @OneToMany(mappedBy="employee")
     private List<PerformanceReview> performanceReviews;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary) {
         this.id = id;
