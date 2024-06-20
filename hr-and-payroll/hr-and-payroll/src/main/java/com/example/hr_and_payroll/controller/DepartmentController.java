@@ -2,7 +2,7 @@ package com.example.hr_and_payroll.controller;
 
 import com.example.hr_and_payroll.domain.dto.DepartmentDTO;
 import com.example.hr_and_payroll.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/departments")
 public class DepartmentController {
-    @Autowired
-    private DepartmentService departmentService;
 
-    @PostMapping
+    private final DepartmentService departmentService;
+
+    @PostMapping("/create-department")
     public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO departmentDTO){
         DepartmentDTO savedDepartment = departmentService.createDepartment(departmentDTO);
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
@@ -27,7 +28,7 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all-department")
     public ResponseEntity<List<DepartmentDTO>> getAllDepartment(){
         List<DepartmentDTO> department = departmentService.getAllDepartment();
         return ResponseEntity.ok(department);

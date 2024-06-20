@@ -16,9 +16,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "performance_reviews")
-@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 public class PerformanceReview  extends  BaseDomain {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name = "review_date", nullable = false)
     private LocalDate reviewDate;
     @Column(name = "comments")

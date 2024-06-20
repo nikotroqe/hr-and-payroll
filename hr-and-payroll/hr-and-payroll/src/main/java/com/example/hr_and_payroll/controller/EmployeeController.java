@@ -2,7 +2,7 @@ package com.example.hr_and_payroll.controller;
 
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/employees")
 public class EmployeeController {
-    @Autowired
-    private EmployeeService employeeService;
 
-    @PostMapping
+    private final EmployeeService employeeService;
+
+    @PostMapping("/create-employee")
     public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO){
         EmployeeDTO savedEmployee = employeeService.createEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
@@ -27,7 +28,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all-employee")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok(employees);

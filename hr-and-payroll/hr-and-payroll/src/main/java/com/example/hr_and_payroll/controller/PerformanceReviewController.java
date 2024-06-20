@@ -2,7 +2,7 @@ package com.example.hr_and_payroll.controller;
 
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/performance-review")
 public class PerformanceReviewController {
-    @Autowired
-    private PerformanceReviewService performanceReviewService;
+
+    private final PerformanceReviewService performanceReviewService;
 
     @PostMapping("/create")
     public ResponseEntity<PerformanceReviewDTO> createPerformanceReview(@RequestBody PerformanceReviewDTO performanceReviewDTO){
@@ -27,7 +28,7 @@ public class PerformanceReviewController {
         return ResponseEntity.ok(performanceReviewDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all-performance-review")
     public ResponseEntity<List<PerformanceReviewDTO>> getAllPerformanceReview(){
         List<PerformanceReviewDTO> performanceReview = performanceReviewService.getAllPerformanceReview();
         return ResponseEntity.ok(performanceReview);
