@@ -7,6 +7,10 @@ import com.example.hr_and_payroll.mapper.PerformanceReviewMapper;
 import com.example.hr_and_payroll.repository.PerformanceReviewRepository;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +40,12 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
         List<PerformanceReview> performanceReview = performanceReviewRepository.findAll();
         return performanceReview.stream().map((performanceReviews) -> PerformanceReviewMapper.mapToPerformanceReviewDto(performanceReviews))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<PerformanceReview> getAllPerformanceReview1(int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return performanceReviewRepository.findAll(pageable);
     }
 
     @Override

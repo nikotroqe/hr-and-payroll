@@ -1,8 +1,11 @@
 package com.example.hr_and_payroll.controller;
 
 import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
+import com.example.hr_and_payroll.domain.entity.Department;
+import com.example.hr_and_payroll.domain.entity.PerformanceReview;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,15 @@ public class PerformanceReviewController {
     public ResponseEntity<List<PerformanceReviewDTO>> getAllPerformanceReview(){
         List<PerformanceReviewDTO> performanceReview = performanceReviewService.getAllPerformanceReview();
         return ResponseEntity.ok(performanceReview);
+    }
+
+    @GetMapping("/list-performance-review")
+    public Page<PerformanceReview> listPerformanceReview(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort) {
+
+        return performanceReviewService.getAllPerformanceReview1(page, size, sort);
     }
 
     @PutMapping("/update/{id}")

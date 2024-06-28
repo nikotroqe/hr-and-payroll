@@ -7,16 +7,21 @@ import com.example.hr_and_payroll.mapper.DepartmentMapper;
 import com.example.hr_and_payroll.repository.DepartmentRepository;
 import com.example.hr_and_payroll.service.DepartmentService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
     @Override
     public DepartmentDTO createDepartment(DepartmentDTO departmentDTO) {
         Department department = DepartmentMapper.mapToDepartment(departmentDTO);
@@ -36,6 +41,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<Department> department = departmentRepository.findAll();
         return department.stream().map((departments) -> DepartmentMapper.mapToDepartmentDto(departments))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Department> getAllDepartment1(int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return departmentRepository.findAll(pageable);
     }
 
     @Override
