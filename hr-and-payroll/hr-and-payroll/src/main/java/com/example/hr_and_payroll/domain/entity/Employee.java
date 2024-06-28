@@ -3,6 +3,8 @@ package com.example.hr_and_payroll.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter @Setter
@@ -25,6 +27,13 @@ public class Employee extends  BaseDomain {
     private String designation;
     @Column(name = "salary")
     private Double salary;
+    @Column(name = "start_date")
+    private LocalDate startDate;
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Transient
+    private Duration duration;
 
     @OneToMany(mappedBy="employee")
     private List<PerformanceReview> performanceReviews;
