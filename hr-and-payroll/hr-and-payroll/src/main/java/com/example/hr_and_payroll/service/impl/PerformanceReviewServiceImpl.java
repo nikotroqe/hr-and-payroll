@@ -7,6 +7,7 @@ import com.example.hr_and_payroll.mapper.PerformanceReviewMapper;
 import com.example.hr_and_payroll.repository.PerformanceReviewRepository;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +18,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PerformanceReviewServiceImpl implements PerformanceReviewService {
 
-    private PerformanceReviewRepository performanceReviewRepository;
+    private final PerformanceReviewRepository performanceReviewRepository;
     @Override
     public PerformanceReviewDTO createPerformanceReview(PerformanceReviewDTO performanceReviewDTO) {
         PerformanceReview performanceReview = PerformanceReviewMapper.mapToPerformanceReview(performanceReviewDTO);
