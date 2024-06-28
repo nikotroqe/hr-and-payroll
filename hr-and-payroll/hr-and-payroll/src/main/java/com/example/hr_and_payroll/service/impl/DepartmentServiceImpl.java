@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
+
     private DepartmentRepository departmentRepository;
     @Override
     public DepartmentDTO createDepartment(DepartmentDTO departmentDTO) {
