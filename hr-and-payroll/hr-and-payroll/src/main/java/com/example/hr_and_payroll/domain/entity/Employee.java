@@ -1,5 +1,6 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,8 +29,10 @@ public class Employee extends  BaseDomain {
     @Column(name = "salary")
     private Double salary;
     @Column(name = "start_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @Column(name = "end_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @Transient
@@ -42,7 +45,7 @@ public class Employee extends  BaseDomain {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary) {
+    public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary,LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,6 +53,8 @@ public class Employee extends  BaseDomain {
         this.age = age;
         this.designation = designation;
         this.salary = salary;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
 

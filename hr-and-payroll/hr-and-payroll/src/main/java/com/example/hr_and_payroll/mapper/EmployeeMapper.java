@@ -12,7 +12,9 @@ public class EmployeeMapper {
                 employee.getEmail(),
                 employee.getAge(),
                 employee.getDesignation(),
-                employee.getSalary()
+                employee.getSalary(),
+                employee.getStartDate(),
+                employee.getEndDate()
         );
     }
     public static Employee mapToEmployee(EmployeeDTO employeeDTO){
@@ -23,7 +25,9 @@ public class EmployeeMapper {
                 employeeDTO.getEmail(),
                 employeeDTO.getAge(),
                 employeeDTO.getDesignation(),
-                employeeDTO.getSalary()
+                employeeDTO.getSalary(),
+                employeeDTO.getStartDate(),
+                employeeDTO.getEndDate()
         );
     }
 }

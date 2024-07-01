@@ -1,6 +1,5 @@
 package com.example.hr_and_payroll.controller;
 
-import com.example.hr_and_payroll.domain.dto.DepartmentDTO;
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.entity.Employee;
 import com.example.hr_and_payroll.service.EmployeeService;
@@ -10,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -45,8 +45,6 @@ public class EmployeeController {
         return employeeService.getAllEmployees1(page, size, sort);
     }
 
-
-
     @PutMapping("/update/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Integer employeeId,
                                                       @RequestBody EmployeeDTO updatedEmployee){
@@ -59,6 +57,5 @@ public class EmployeeController {
         employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok("Employee deleted successfully!.");
     }
-
 
 }

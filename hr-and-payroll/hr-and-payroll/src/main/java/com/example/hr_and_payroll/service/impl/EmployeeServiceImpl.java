@@ -1,11 +1,8 @@
 package com.example.hr_and_payroll.service.impl;
 
-import com.example.hr_and_payroll.domain.dto.DepartmentDTO;
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
-import com.example.hr_and_payroll.domain.entity.Department;
 import com.example.hr_and_payroll.domain.entity.Employee;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
-import com.example.hr_and_payroll.mapper.DepartmentMapper;
 import com.example.hr_and_payroll.mapper.EmployeeMapper;
 import com.example.hr_and_payroll.repository.EmployeeRepository;
 import com.example.hr_and_payroll.service.EmployeeService;
@@ -16,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
         Employee savedEmployee = employeeRepository.save(employee);
+        employee.setStartDate(LocalDate.now());
+        employee.setEndDate(null);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
 
