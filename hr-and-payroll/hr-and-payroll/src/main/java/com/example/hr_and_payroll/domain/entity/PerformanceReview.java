@@ -26,9 +26,9 @@ public class PerformanceReview  extends  BaseDomain {
     @Column(name = "rating")
     private Integer rating;// Rating out of 10 or any other scale
 
-    //@ManyToOne
-    //@JoinColumn(name = "employee_id")
-    //private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     public PerformanceReview(LocalDate reviewDate, String comments, Integer rating) {
         this.reviewDate = reviewDate;

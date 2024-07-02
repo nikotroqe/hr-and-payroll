@@ -38,8 +38,8 @@ public class Employee extends  BaseDomain {
     @Transient
     private Duration duration;
 
-    //@OneToMany(mappedBy="employee")
-    //private List<PerformanceReview> performanceReviews;
+    @OneToMany(mappedBy="employee")
+    private List<PerformanceReview> performanceReviews;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
