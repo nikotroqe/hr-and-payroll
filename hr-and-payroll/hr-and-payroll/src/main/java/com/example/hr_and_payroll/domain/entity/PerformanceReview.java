@@ -26,8 +26,8 @@ public class PerformanceReview  extends  BaseDomain {
     @Column(name = "rating")
     private Integer rating;// Rating out of 10 or any other scale
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id",unique = true)
     private Employee employee;
 
     public PerformanceReview(LocalDate reviewDate, String comments, Integer rating) {

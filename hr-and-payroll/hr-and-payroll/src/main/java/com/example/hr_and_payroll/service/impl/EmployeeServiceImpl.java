@@ -1,9 +1,11 @@
 package com.example.hr_and_payroll.service.impl;
 
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
+import com.example.hr_and_payroll.domain.entity.Department;
 import com.example.hr_and_payroll.domain.entity.Employee;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
 import com.example.hr_and_payroll.mapper.EmployeeMapper;
+import com.example.hr_and_payroll.repository.DepartmentRepository;
 import com.example.hr_and_payroll.repository.EmployeeRepository;
 import com.example.hr_and_payroll.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
@@ -29,6 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
         employee.setStartDate(LocalDate.now());
         employee.setEndDate(null);
+
+        Department department = departmentRepository.findById(Math.toIntExact(employeeDTO.getDepartmentId())).orElseThrow(
+                () -> new ResourceNotFoundException("Department is not exist with given id: " + employeeDTO.getDepartmentId())
+        );
+        employee.setDepartment(department);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
 

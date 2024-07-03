@@ -16,6 +16,7 @@ public class PerformanceReviewDTO{
     private LocalDate reviewDate;
     private String comments;
     private Integer rating;
+    private Integer employeeId;
 
     public PerformanceReviewDTO(LocalDate reviewDate, String comments, Integer rating) {
         this.reviewDate = reviewDate;

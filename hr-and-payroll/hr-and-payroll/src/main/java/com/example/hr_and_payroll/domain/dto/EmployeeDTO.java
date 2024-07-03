@@ -1,5 +1,6 @@
 package com.example.hr_and_payroll.domain.dto;
 
+import com.example.hr_and_payroll.domain.entity.Department;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +27,9 @@ public class EmployeeDTO extends BaseDomainDTO{
     private Long age;
     private String designation;
     private Double salary;
+    private Integer departmentId;
 
-
-    public EmployeeDTO(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary,LocalDate startDate, LocalDate endDate) {
+    public EmployeeDTO(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary,LocalDate startDate, LocalDate endDate, Integer departmentId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,5 +39,6 @@ public class EmployeeDTO extends BaseDomainDTO{
         this.salary = salary;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.departmentId = departmentId;
     }
 }

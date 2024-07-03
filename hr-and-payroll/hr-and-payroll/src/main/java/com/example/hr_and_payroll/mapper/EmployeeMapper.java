@@ -14,7 +14,8 @@ public class EmployeeMapper {
                 employee.getDesignation(),
                 employee.getSalary(),
                 employee.getStartDate(),
-                employee.getEndDate()
+                employee.getEndDate(),
+                employee.getDepartment().getId()
         );
     }
     public static Employee mapToEmployee(EmployeeDTO employeeDTO){
