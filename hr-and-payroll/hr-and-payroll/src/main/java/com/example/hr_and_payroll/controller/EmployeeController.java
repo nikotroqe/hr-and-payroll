@@ -39,14 +39,14 @@ public class EmployeeController {
         return employeeService.getAllEmployees1(page, size, sort);
     }
 
-    @PutMapping("/{employeeId}/update")
+    @PutMapping("/{id}/update")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Integer employeeId,
                                                       @RequestBody EmployeeDTO updatedEmployee){
         EmployeeDTO employeeDTO = employeeService.updateEmployee(employeeId, updatedEmployee);
         return ResponseEntity.ok(employeeDTO);
     }
 
-    @DeleteMapping("/{employeeId}/delete")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") Integer employeeId){
         employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok("Employee deleted successfully!.");
