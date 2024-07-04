@@ -30,12 +30,6 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentDTO);
     }
 
-    @GetMapping("/all-department")
-    public ResponseEntity<List<DepartmentDTO>> getAllDepartment(){
-        List<DepartmentDTO> department = departmentService.getAllDepartment();
-        return ResponseEntity.ok(department);
-    }
-
     @GetMapping("/documents/list")
     public Page<Department> listDep(
             @RequestParam(defaultValue = "0") int page,

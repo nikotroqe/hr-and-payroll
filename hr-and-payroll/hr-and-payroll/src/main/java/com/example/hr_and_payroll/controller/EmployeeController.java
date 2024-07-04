@@ -29,11 +29,6 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDTO);
     }
 
-    @GetMapping("/all-employee")
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
-        List<EmployeeDTO> employees = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employees);
-    }
 
     @GetMapping("/work-experience/list")
     public Page<Employee> list(
