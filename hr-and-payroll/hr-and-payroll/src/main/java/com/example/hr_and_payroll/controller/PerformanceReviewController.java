@@ -31,13 +31,8 @@ public class PerformanceReviewController {
         return ResponseEntity.ok(performanceReviewDTO);
     }
 
-    @GetMapping("/all-performance-review")
-    public ResponseEntity<List<PerformanceReviewDTO>> getAllPerformanceReview(){
-        List<PerformanceReviewDTO> performanceReview = performanceReviewService.getAllPerformanceReview();
-        return ResponseEntity.ok(performanceReview);
-    }
 
-    @GetMapping("/list-performance-review")
+    @GetMapping("/list")
     public Page<PerformanceReview> listPerformanceReview(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
