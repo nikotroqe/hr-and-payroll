@@ -45,7 +45,8 @@ public class Employee extends  BaseDomain {
     @JoinColumn(name = "department_id", referencedColumnName = "id",unique = true)
     private Department department;
 
-    public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary,LocalDate startDate, LocalDate endDate) {
+
+    public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary, LocalDate startDate, LocalDate endDate, Department departmentId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +56,7 @@ public class Employee extends  BaseDomain {
         this.salary = salary;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
+        this.department = departmentId;
 
+    }
 }

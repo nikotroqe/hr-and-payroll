@@ -28,15 +28,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
-        Employee savedEmployee = employeeRepository.save(employee);
-        employee.setStartDate(LocalDate.now());
-        employee.setEndDate(null);
+        Department department = departmentRepository.findById(employeeDTO.getDepartmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found with id: " + employeeDTO.getDepartmentId()));
 
-        Department department = departmentRepository.findById(Math.toIntExact(employeeDTO.getDepartmentId())).orElseThrow(
-                () -> new ResourceNotFoundException("Department is not exist with given id: " + employeeDTO.getDepartmentId())
-        );
+        Employee employee = new Employee();
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setAge(employeeDTO.getAge());
+        employee.setDesignation(employeeDTO.getDesignation());
+        employee.setSalary(employeeDTO.getSalary());
+        employee.setStartDate(employeeDTO.getStartDate());
+        employee.setEndDate(employeeDTO.getEndDate());
         employee.setDepartment(department);
+
+        Employee savedEmployee = employeeRepository.save(employee);
+
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
 
