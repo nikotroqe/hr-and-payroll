@@ -18,13 +18,13 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
-    @PostMapping("/create-department")
+    @PostMapping("/documents/upload")
     public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO departmentDTO){
         DepartmentDTO savedDepartment = departmentService.createDepartment(departmentDTO);
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/documents/download/{documentId}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable("id") Integer departmentId){
         DepartmentDTO departmentDTO = departmentService.getDepartmentById(departmentId);
         return ResponseEntity.ok(departmentDTO);
@@ -36,7 +36,7 @@ public class DepartmentController {
         return ResponseEntity.ok(department);
     }
 
-    @GetMapping("/list-dep")
+    @GetMapping("/documents/list")
     public Page<Department> listDep(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -52,7 +52,7 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/documents/{employeeId}/delete/{id}")
     public ResponseEntity<String> deleteDepartment(@PathVariable("id") Integer departmentId){
         departmentService.deleteDepartment(departmentId);
         return ResponseEntity.ok("Department deleted successfully!.");

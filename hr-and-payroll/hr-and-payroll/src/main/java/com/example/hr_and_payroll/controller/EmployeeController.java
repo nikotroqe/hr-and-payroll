@@ -18,12 +18,12 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/create")
+    @PostMapping("/work-experience/{employeeId}/create")
     public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO){
         EmployeeDTO savedEmployee = employeeService.createEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
-    @GetMapping("/get/{id}")
+    @GetMapping("/work-experience/{employeeId}/get/{id}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Integer employeeId){
         EmployeeDTO employeeDTO = employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok(employeeDTO);
@@ -35,7 +35,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/work-experience/list")
     public Page<Employee> list(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -44,14 +44,14 @@ public class EmployeeController {
         return employeeService.getAllEmployees1(page, size, sort);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/work-experience/{employeeId}/update/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Integer employeeId,
                                                       @RequestBody EmployeeDTO updatedEmployee){
         EmployeeDTO employeeDTO = employeeService.updateEmployee(employeeId, updatedEmployee);
         return ResponseEntity.ok(employeeDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/work-experience/{employeeId}/delete/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") Integer employeeId){
         employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok("Employee deleted successfully!.");
