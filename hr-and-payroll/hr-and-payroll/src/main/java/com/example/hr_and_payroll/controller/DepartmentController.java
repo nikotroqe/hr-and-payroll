@@ -18,13 +18,13 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
-    @PostMapping("/upload")
+    @PostMapping("/")
     public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO departmentDTO){
         DepartmentDTO savedDepartment = departmentService.createDepartment(departmentDTO);
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
     }
 
-    @GetMapping("/download/{documentId}")
+    @GetMapping("/{documentId}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable("id") Integer departmentId){
         DepartmentDTO departmentDTO = departmentService.getDepartmentById(departmentId);
         return ResponseEntity.ok(departmentDTO);
