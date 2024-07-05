@@ -18,19 +18,19 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
-    @PostMapping("/create-department")
+    @PostMapping("/create")
     public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody DepartmentDTO departmentDTO){
         DepartmentDTO savedDepartment = departmentService.createDepartment(departmentDTO);
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
     }
 
-    @GetMapping("/department-get-id/{documentId}")
+    @GetMapping("/get/{documentId}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable("id") Integer departmentId){
         DepartmentDTO departmentDTO = departmentService.getDepartmentById(departmentId);
         return ResponseEntity.ok(departmentDTO);
     }
 
-    @GetMapping("/list-department")
+    @GetMapping("/list")
     public Page<Department> listDep(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
