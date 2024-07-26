@@ -31,12 +31,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/list")
-    public Page<Employee> list(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sort) {
-
-        return employeeService.getAllEmployees1(page, size, sort);
+    public Page<EmployeeDTO> list(@Valid @RequestParam Map<String, Object> filterRequest,
+                                                  @RequestParam(defaultValue = "0") Integer page,
+                                                  @RequestParam(defaultValue = "10") Integer size,
+                                                  @RequestParam(defaultValue = "id") String sort
+    ) {
+        return employeeService.getAllEmployees1(filterRequest, page, size, sort);
     }
 
     @PutMapping("/update/{id}")

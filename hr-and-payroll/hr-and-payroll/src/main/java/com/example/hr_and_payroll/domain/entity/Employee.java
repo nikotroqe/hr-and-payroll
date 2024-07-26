@@ -1,5 +1,6 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
@@ -39,6 +40,7 @@ public class Employee extends  BaseDomain {
     private Duration duration;
 
     @OneToMany(orphanRemoval = true, mappedBy="employee")
+    @JsonBackReference
     private List<PerformanceReview> performanceReviews;
 
     @ManyToOne(cascade = CascadeType.ALL)

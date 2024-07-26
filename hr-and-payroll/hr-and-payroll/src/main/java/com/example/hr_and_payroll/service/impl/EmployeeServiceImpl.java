@@ -1,13 +1,16 @@
 package com.example.hr_and_payroll.service.impl;
 
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
+import com.example.hr_and_payroll.domain.dto.EmployeeQueryDsl;
 import com.example.hr_and_payroll.domain.entity.Department;
 import com.example.hr_and_payroll.domain.entity.Employee;
+import com.example.hr_and_payroll.domain.hr.EmployeeFilter;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
 import com.example.hr_and_payroll.mapper.EmployeeMapper;
 import com.example.hr_and_payroll.repository.DepartmentRepository;
 import com.example.hr_and_payroll.repository.EmployeeRepository;
 import com.example.hr_and_payroll.service.EmployeeService;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
+    private final EmployeeQueryDsl employeeQueryDsl;
+
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
@@ -60,9 +66,29 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public Page<Employee> getAllEmployees1(int page, int size, String sort) {
+    @Override
+    public Page<EmployeeDTO> getAllEmployees1(Map<String, Object> filterRequest, int page, int size, String sort) {
+
+        EmployeeFilter employeeFilter = new EmployeeFilter();
+        if (filterRequest.containsKey("firstName")) {
+            employeeFilter.setFirstName((String) filterRequest.get("firstName"));
+        }
+        if (filterRequest.containsKey("lastName")) {
+            employeeFilter.setLastName((String) filterRequest.get("lastName"));
+        }
+        // Add other filters if needed
+
+        // Create Pageable object
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-        return employeeRepository.findAll(pageable);
+
+        // Build the query predicate based on EmployeeFilter using EmployeeQueryDsl
+        Predicate predicate = employeeQueryDsl.filter(employeeFilter);
+
+        // Fetch the data from the repository with filtering and pagination
+        Page<Employee> employees = employeeRepository.findAll(predicate, pageable);
+
+        // Map the result to EmployeeDTO
+        return employees.map(EmployeeMapper::mapToEmployeeDto);
     }
 
     @Override

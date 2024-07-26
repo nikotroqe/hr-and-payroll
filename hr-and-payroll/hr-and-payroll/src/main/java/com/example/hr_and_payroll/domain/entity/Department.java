@@ -1,5 +1,6 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -19,7 +20,9 @@ import java.util.Set;
 public class Department extends BaseDomain {
     @Column(name = "name", nullable = false)
     private String name;
+
     @OneToMany(mappedBy = "department")
+    @JsonBackReference
     private Set<Employee> employees;
 
     public Department(String name) {

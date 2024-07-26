@@ -12,8 +12,9 @@ import lombok.Setter;
 public class EmployeeFilter {
     String firstName;
     String lastName;
-    String email;
-    String standardIds;
-    String iafCodeIds;
+
+    //String email;
+    //String standardIds;
+    //String iafCodeIds;
     //Long age;
 }
