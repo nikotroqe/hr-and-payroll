@@ -2,16 +2,15 @@ package com.example.hr_and_payroll.controller;
 
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.entity.Employee;
-import com.example.hr_and_payroll.domain.hr.EmployeeFilter;
-import com.example.hr_and_payroll.repository.EmployeeRepository;
 import com.example.hr_and_payroll.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +18,6 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-
-    private final EmployeeRepository employeeRepository;
 
     @PostMapping("/create")
     public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO){
@@ -32,12 +29,6 @@ public class EmployeeController {
         EmployeeDTO employeeDTO = employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok(employeeDTO);
     }
-
-    @GetMapping("/get/name")
-    public ResponseEntity<List<Employee>> findByNameLike(@RequestParam String firstName){
-        return new ResponseEntity<List<Employee>>(employeeRepository.findByNameLike("%"+firstName+"%"), HttpStatus.OK);
-    }
-
 
     @GetMapping("/list")
     public Page<Employee> list(

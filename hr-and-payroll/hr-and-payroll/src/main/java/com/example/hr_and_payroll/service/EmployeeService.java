@@ -2,7 +2,6 @@ package com.example.hr_and_payroll.service;
 
 import com.example.hr_and_payroll.domain.dto.EmployeeDTO;
 import com.example.hr_and_payroll.domain.entity.Employee;
-import com.example.hr_and_payroll.domain.hr.EmployeeFilter;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
