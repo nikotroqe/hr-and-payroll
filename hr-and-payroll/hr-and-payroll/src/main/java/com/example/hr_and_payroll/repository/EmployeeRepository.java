@@ -12,6 +12,5 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
 
-    List<Employee> findByNameLike(String firstName);
 
 }
