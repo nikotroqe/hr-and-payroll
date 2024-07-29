@@ -4,6 +4,7 @@ import com.example.hr_and_payroll.domain.dto.PerformanceReviewDTO;
 import com.example.hr_and_payroll.domain.entity.Department;
 import com.example.hr_and_payroll.domain.entity.PerformanceReview;
 import com.example.hr_and_payroll.service.PerformanceReviewService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,11 +36,12 @@ public class PerformanceReviewController {
 
     @GetMapping("/list")
     public Page<PerformanceReview> listPerformanceReview(
+            @Valid @RequestParam Map<String, Object> filterRequest,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort) {
 
-        return performanceReviewService.getAllPerformanceReview1(page, size, sort);
+        return performanceReviewService.getAllPerformanceReview1(filterRequest,page, size, sort);
     }
 
     @PutMapping("/update/{id}")

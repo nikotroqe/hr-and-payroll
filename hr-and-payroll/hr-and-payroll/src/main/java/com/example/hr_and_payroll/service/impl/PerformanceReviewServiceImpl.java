@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +45,7 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
     }
 
     @Override
-    public Page<PerformanceReview> getAllPerformanceReview1(int page, int size, String sort) {
+    public Page<PerformanceReview> getAllPerformanceReview1(Map<String, Object> filterRequest, int page, int size, String sort) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
         return performanceReviewRepository.findAll(pageable);
     }
