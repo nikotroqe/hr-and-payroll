@@ -47,6 +47,10 @@ public class Employee extends  BaseDomain {
     @JoinColumn(name = "department_id", referencedColumnName = "id",unique = true)
     private Department department;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id", referencedColumnName = "id",unique = true)
+    private Project project;
+
 
     public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary, LocalDate startDate, LocalDate endDate, Department departmentId) {
         this.id = id;
