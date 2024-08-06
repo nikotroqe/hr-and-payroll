@@ -8,6 +8,7 @@ import lombok.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -47,9 +48,8 @@ public class Employee extends  BaseDomain {
     @JoinColumn(name = "department_id", referencedColumnName = "id",unique = true)
     private Department department;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id", referencedColumnName = "id",unique = true)
-    private Project project;
+    @ManyToMany(mappedBy = "employees")
+    private Set<Project> projects;
 
 
     public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary, LocalDate startDate, LocalDate endDate, Department departmentId) {
