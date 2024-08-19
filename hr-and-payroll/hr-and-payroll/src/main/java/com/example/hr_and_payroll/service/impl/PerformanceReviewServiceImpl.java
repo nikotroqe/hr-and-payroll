@@ -33,7 +33,7 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
     @Override
     public PerformanceReviewDTO getPerformanceReviewById(Integer performanceReviewId) {
         PerformanceReview performanceReview = performanceReviewRepository.findById(performanceReviewId)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee is not exist with given id: " + performanceReviewId));
+                .orElseThrow(()-> new ResourceNotFoundException("Performance Review is not exist with given id: " + performanceReviewId));
         return PerformanceReviewMapper.mapToPerformanceReviewDto(performanceReview);
     }
 
