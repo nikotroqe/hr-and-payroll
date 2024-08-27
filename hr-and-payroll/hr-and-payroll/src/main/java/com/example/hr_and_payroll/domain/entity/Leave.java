@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "leave")
