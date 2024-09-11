@@ -21,9 +21,9 @@ public class Leave extends BaseDomain{
     @JoinColumn(name = "employee_id", referencedColumnName = "id",unique = true)
     private Employee employee;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "leave_type", nullable = false)
-    private String leaveType;
+    private LeaveType leaveType;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
@@ -31,19 +31,26 @@ public class Leave extends BaseDomain{
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Transient
+    @Column(name = "total_days", nullable = false)
     private long totalDays;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private LeaveStatus status;
 
-    public Leave(String leaveType, LocalDate startDate, LocalDate endDate, long totalDays, String status) {
+    public Leave(Employee employee,LeaveType leaveType, LocalDate startDate, LocalDate endDate, long totalDays, LeaveStatus status) {
+        this.employee = employee;
         this.leaveType = leaveType;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalDays = totalDays;
         this.status = status;
+    }
+
+    public Leave(LocalDate startDate, LocalDate endDate, long totalDays) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.totalDays = totalDays;
     }
     /*public void calculateTotalDays() {
         if (startDate != null && endDate != null) {

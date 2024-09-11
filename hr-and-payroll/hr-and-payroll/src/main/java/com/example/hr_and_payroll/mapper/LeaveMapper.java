@@ -8,20 +8,16 @@ public class LeaveMapper {
         return new LeaveDTO(
                 leave.getId(),
                 leave.getEmployee().getId(),
-                leave.getLeaveType(),
                 leave.getStartDate(),
                 leave.getEndDate(),
-                leave.getTotalDays(),
-                leave.getStatus()
+                leave.getTotalDays()
         );
     }
     public static Leave mapToLeave(LeaveDTO leaveDTO){
         return new Leave(
-                leaveDTO.getLeaveType(),
                 leaveDTO.getStartDate(),
                 leaveDTO.getEndDate(),
-                leaveDTO.getTotalDays(),
-                leaveDTO.getStatus()
+                leaveDTO.getTotalDays()
         );
     }
 }
