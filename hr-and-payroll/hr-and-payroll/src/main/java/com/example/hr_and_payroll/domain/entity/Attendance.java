@@ -2,14 +2,15 @@ package com.example.hr_and_payroll.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.JoinColumn;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 public class Attendance extends BaseDomain{
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id",unique = true)
     private Employee employee;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -27,38 +28,47 @@ public class Attendance extends BaseDomain{
     private LocalDate date;
 
     @Column(name = "check_in_time")
-    private LocalDateTime checkInTime;
+    private LocalTime checkInTime;
 
     @Column(name = "check_out_time")
-    private LocalDateTime checkOutTime;
+    private LocalTime checkOutTime;
 
-    @Column(name = "hours_worked")
-    private Double hoursWorked;
+    @Column(name = "hoursWorked")
+    private double hoursWorked;
+
+    //@Column(name = "overtime_hours")
+    //private Duration overtimeHours;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private AttendanceStatus status;
 
-    // Optional: If there's a leave entity
-    @OneToOne
-    @JoinColumn(name = "leave_id")
-    private Leave leave;
 
-
-    public Attendance(Employee employee, LocalDate date, LocalDateTime checkInTime, LocalDateTime checkOutTime, Double hoursWorked, AttendanceStatus status, Leave leave) {
+    public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, AttendanceStatus status) {
         this.employee = employee;
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
         this.status = status;
-        this.leave = leave;
+
     }
 
-    public Attendance(LocalDate date, LocalDateTime checkInTime, LocalDateTime checkOutTime, Double hoursWorked) {
+    public Attendance(LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked) {
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
+        //this.overtimeHours = overtimeHours;
     }
+
+    /*public void calculateHoursAndOvertime(double standardHoursPerDay) {
+        if (checkInTime != null && checkOutTime != null) {
+            Duration workedDuration = Duration.between(checkInTime, checkOutTime);
+            double workedHours = workedDuration.toMinutes() / 60.0;
+            this.hoursWorked = workedHours;
+
+            this.overtimeHours = Math.max(0, workedHours - standardHoursPerDay);
+        }
+    }*/
 }

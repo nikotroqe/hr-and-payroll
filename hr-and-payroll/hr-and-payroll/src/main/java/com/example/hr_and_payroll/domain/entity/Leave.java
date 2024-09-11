@@ -9,21 +9,21 @@ import lombok.Setter;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Getter
 @Setter
-//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "leave")
 public class Leave extends BaseDomain{
-    @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "id",unique = true)
     private Employee employee;
 
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     @Column(name = "leave_type", nullable = false)
-    private LeaveType leaveType;
+    private String leaveType;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
@@ -31,14 +31,14 @@ public class Leave extends BaseDomain{
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "total_days")
-    private Integer totalDays;
+    @Transient
+    private long totalDays;
 
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private LeaveStatus status;
+    private String status;
 
-    public Leave(Employee employee, LeaveType leaveType, LocalDate startDate, LocalDate endDate, Integer totalDays, LeaveStatus status) {
+    public Leave(Employee employee, String leaveType, LocalDate startDate, LocalDate endDate, long totalDays, String status) {
         this.employee = employee;
         this.leaveType = leaveType;
         this.startDate = startDate;
@@ -47,9 +47,16 @@ public class Leave extends BaseDomain{
         this.status = status;
     }
 
-    public Leave(LocalDate startDate, LocalDate endDate, Integer totalDays) {
+    public Leave(String leaveType, LocalDate startDate, LocalDate endDate, long totalDays, String status) {
+        this.leaveType = leaveType;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalDays = totalDays;
+        this.status = status;
     }
+    /*public void calculateTotalDays() {
+        if (startDate != null && endDate != null) {
+            this.totalDays = Period.between(startDate, endDate).getDays() + 1;
+        }
+    }*/
 }

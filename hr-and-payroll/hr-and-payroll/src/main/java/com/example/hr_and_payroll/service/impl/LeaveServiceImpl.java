@@ -3,6 +3,7 @@ package com.example.hr_and_payroll.service.impl;
 import com.example.hr_and_payroll.domain.dto.LeaveDTO;
 import com.example.hr_and_payroll.domain.entity.Attendance;
 import com.example.hr_and_payroll.domain.entity.Leave;
+import com.example.hr_and_payroll.domain.entity.LeaveStatus;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
 import com.example.hr_and_payroll.mapper.AttendanceMapper;
 import com.example.hr_and_payroll.mapper.LeaveMapper;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+import static com.example.hr_and_payroll.domain.entity.QLeave.leave;
+
 @Service
 @RequiredArgsConstructor
 public class LeaveServiceImpl implements LeaveService {
@@ -25,6 +28,7 @@ public class LeaveServiceImpl implements LeaveService {
     private final LeaveRepository leaveRepository;
     @Override
     public LeaveDTO createLeave(LeaveDTO leaveDTO) {
+        //leave.calculateTotalDays();
         Leave leave = LeaveMapper.mapToLeave(leaveDTO);
         Leave savedLeave = leaveRepository.save(leave);
         return LeaveMapper.mapToLeaveDto(savedLeave);
@@ -64,4 +68,19 @@ public class LeaveServiceImpl implements LeaveService {
         );
         leaveRepository.deleteById(leaveId);
     }
+
+
+    /*public void approveLeave(Integer leaveId) {
+        Leave leave = leaveRepository.findById(leaveId).orElseThrow(() -> new RuntimeException("Leave not found"));
+        leave.setStatus(LeaveStatus.APPROVED);
+        leaveRepository.save(leave);
+        // Send notification
+    }
+
+    public void rejectLeave(Integer leaveId) {
+        Leave leave = leaveRepository.findById(leaveId).orElseThrow(() -> new RuntimeException("Leave not found"));
+        leave.setStatus(LeaveStatus.REJECTED);
+        leaveRepository.save(leave);
+        // Send notification
+    }*/
 }

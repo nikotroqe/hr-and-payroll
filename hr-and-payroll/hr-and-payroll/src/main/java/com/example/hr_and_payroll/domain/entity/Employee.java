@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -43,6 +44,14 @@ public class Employee extends  BaseDomain {
     @OneToMany(orphanRemoval = true, mappedBy="employee")
     @JsonBackReference
     private List<PerformanceReview> performanceReviews;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
+    @JsonBackReference
+    private List<Attendance> attendances = new ArrayList<>();
+
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
+    @JsonBackReference
+    private Leave leave;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id",unique = true)

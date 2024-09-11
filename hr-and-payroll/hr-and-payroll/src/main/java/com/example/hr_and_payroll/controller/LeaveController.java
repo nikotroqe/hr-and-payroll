@@ -1,6 +1,5 @@
 package com.example.hr_and_payroll.controller;
 
-import com.example.hr_and_payroll.domain.dto.AttendanceDTO;
 import com.example.hr_and_payroll.domain.dto.LeaveDTO;
 import com.example.hr_and_payroll.domain.entity.Leave;
 import com.example.hr_and_payroll.service.LeaveService;
