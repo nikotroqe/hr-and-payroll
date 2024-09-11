@@ -38,15 +38,6 @@ public class Leave extends BaseDomain{
     @Column(name = "status", nullable = false)
     private String status;
 
-    public Leave(Employee employee, String leaveType, LocalDate startDate, LocalDate endDate, long totalDays, String status) {
-        this.employee = employee;
-        this.leaveType = leaveType;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalDays = totalDays;
-        this.status = status;
-    }
-
     public Leave(String leaveType, LocalDate startDate, LocalDate endDate, long totalDays, String status) {
         this.leaveType = leaveType;
         this.startDate = startDate;
