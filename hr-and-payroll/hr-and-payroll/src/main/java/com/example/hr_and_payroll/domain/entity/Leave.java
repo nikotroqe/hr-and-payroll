@@ -52,6 +52,7 @@ public class Leave extends BaseDomain{
         this.endDate = endDate;
         this.totalDays = totalDays;
     }
+
     /*public void calculateTotalDays() {
         if (startDate != null && endDate != null) {
             this.totalDays = Period.between(startDate, endDate).getDays() + 1;

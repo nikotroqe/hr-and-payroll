@@ -70,6 +70,7 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
 
+
     /*public void approveLeave(Integer leaveId) {
         Leave leave = leaveRepository.findById(leaveId).orElseThrow(() -> new RuntimeException("Leave not found"));
         leave.setStatus(LeaveStatus.APPROVED);
