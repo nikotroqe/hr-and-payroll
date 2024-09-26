@@ -51,10 +51,6 @@ public class Employee extends  BaseDomain {
 
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
     @JsonBackReference
-    private Overtime overtimes;
-
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
-    @JsonBackReference
     private Leave leave;
 
     @ManyToOne(cascade = CascadeType.ALL)
