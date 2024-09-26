@@ -6,6 +6,7 @@ import com.example.hr_and_payroll.domain.entity.Department;
 public class DepartmentMapper {
     public static DepartmentDTO mapToDepartmentDto(Department department){
         return new DepartmentDTO(
+                department.getId(),
                 department.getName()
         );
     }

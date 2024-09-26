@@ -8,17 +8,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class OvertimeDTO {
-    /*private Integer id;
+    private Integer id;
     private Integer employeeId;
-    private Integer attendanceId;
-    private Double requestedOvertimeHours;
-    private String status;
+    private double overtimeHours;
+    private double regularHours;
+    //private Integer attendanceId;
 
-    public OvertimeDTO(Integer id, Integer employeeId, Integer attendanceId, Double requestedOvertimeHours, String status) {
+    public OvertimeDTO(Integer id, Integer employeeId, double overtimeHours, double regularHours) {
         this.id = id;
         this.employeeId = employeeId;
-        this.attendanceId = attendanceId;
-        this.requestedOvertimeHours = requestedOvertimeHours;
-        this.status = status;
-    }*/
+        this.overtimeHours = overtimeHours;
+        this.regularHours = regularHours;
+        //this.attendanceId = attendanceId;
+    }
 }

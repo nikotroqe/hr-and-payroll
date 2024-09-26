@@ -1,16 +1,16 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.JoinColumn;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,9 +27,11 @@ public class Attendance extends BaseDomain{
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @JsonFormat(pattern = "HH:mm")
     @Column(name = "check_in_time")
     private LocalTime checkInTime;
 
+    @JsonFormat(pattern = "HH:mm")
     @Column(name = "check_out_time")
     private LocalTime checkOutTime;
 
@@ -42,6 +44,10 @@ public class Attendance extends BaseDomain{
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AttendanceStatus status;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="attendance")
+    @JsonBackReference
+    private List<Attendance> attendances = new ArrayList<>();
 
 
     public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, AttendanceStatus status) {
@@ -62,13 +68,4 @@ public class Attendance extends BaseDomain{
         //this.overtimeHours = overtimeHours;
     }
 
-    /*public void calculateHoursAndOvertime(double standardHoursPerDay) {
-        if (checkInTime != null && checkOutTime != null) {
-            Duration workedDuration = Duration.between(checkInTime, checkOutTime);
-            double workedHours = workedDuration.toMinutes() / 60.0;
-            this.hoursWorked = workedHours;
-
-            this.overtimeHours = Math.max(0, workedHours - standardHoursPerDay);
-        }
-    }*/
 }

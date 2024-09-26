@@ -51,6 +51,10 @@ public class Employee extends  BaseDomain {
 
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
     @JsonBackReference
+    private Overtime overtimes;
+
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
+    @JsonBackReference
     private Leave leave;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -60,8 +64,7 @@ public class Employee extends  BaseDomain {
     @ManyToMany(mappedBy = "employees")
     private Set<Project> projects;
 
-
-    public Employee(Integer id, String firstName, String lastName, String email, Long age, String designation, Double salary, LocalDate startDate, LocalDate endDate, Department departmentId) {
+    public Employee(int id, String firstName, String lastName, String email, Long age, String designation, Double salary, LocalDate startDate, LocalDate endDate, Department departmentId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,4 +77,9 @@ public class Employee extends  BaseDomain {
         this.department = departmentId;
 
     }
+
+    public Employee(int id) {
+        this.id = id;
+    }
+
 }

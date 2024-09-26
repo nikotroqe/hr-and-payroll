@@ -3,7 +3,6 @@ package com.example.hr_and_payroll.domain.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.JoinColumn;
@@ -12,33 +11,33 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @Entity
-@Table(name = "overtime_request")
+@Table(name = "overtime")
 public class Overtime extends BaseDomain{
-    /*@ManyToOne
+    @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id",unique = true)
     private Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "attendance_id")
-    private Attendance attendance;
+    @Column(name = "overtime_hours")
+    private Double overtimeHours;
 
-    @Column(name = "requested_overtime_hours")
-    private Double requestedOvertimeHours;
+    @Column(name = "regular_hours")
+    private Double regularHours;;
 
-    //@Enumerated(EnumType.STRING)
-    @Column(name = "status",nullable = false)
-    private String status;
+    //@OneToMany
+    //@JoinColumn(name = "attendance_id")
+    //private Attendance attendance;
 
-    public void OvertimeDTO(Attendance attendance, Double requestedOvertimeHours, String status) {
-        this.attendance = attendance;
-        this.requestedOvertimeHours = requestedOvertimeHours;
-        this.status = status;
+
+    public void OvertimeDTO(double overtimeHours, double regularHours) {
+
+        this.overtimeHours = overtimeHours;
+        this.regularHours = regularHours;
+        //this.attendance = attendance;
     }
 
-    public Overtime(Double requestedOvertimeHours, String status) {
-        this.requestedOvertimeHours = requestedOvertimeHours;
-        this.status = status;
-    }*/
+    public Overtime(double overtimeHours, double regularHours) {
+        this.overtimeHours = overtimeHours;
+        this.regularHours = regularHours;
+    }
 }

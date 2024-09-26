@@ -2,12 +2,9 @@ package com.example.hr_and_payroll.service.impl;
 
 import com.example.hr_and_payroll.domain.dto.AttendanceDTO;
 import com.example.hr_and_payroll.domain.entity.Attendance;
-import com.example.hr_and_payroll.domain.entity.PerformanceReview;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
 import com.example.hr_and_payroll.mapper.AttendanceMapper;
-import com.example.hr_and_payroll.mapper.PerformanceReviewMapper;
 import com.example.hr_and_payroll.repository.AttendanceRepository;
-import com.example.hr_and_payroll.repository.PerformanceReviewRepository;
 import com.example.hr_and_payroll.service.AttendanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,9 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

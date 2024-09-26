@@ -14,5 +14,5 @@ import lombok.*;
 public abstract class BaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    protected int id;
 }

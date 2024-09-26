@@ -1,13 +1,9 @@
 package com.example.hr_and_payroll.service.impl;
 
 import com.example.hr_and_payroll.domain.dto.LeaveDTO;
-import com.example.hr_and_payroll.domain.entity.Attendance;
 import com.example.hr_and_payroll.domain.entity.Leave;
-import com.example.hr_and_payroll.domain.entity.LeaveStatus;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
-import com.example.hr_and_payroll.mapper.AttendanceMapper;
 import com.example.hr_and_payroll.mapper.LeaveMapper;
-import com.example.hr_and_payroll.repository.AttendanceRepository;
 import com.example.hr_and_payroll.repository.LeaveRepository;
 import com.example.hr_and_payroll.service.LeaveService;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-
-import static com.example.hr_and_payroll.domain.entity.QLeave.leave;
 
 @Service
 @RequiredArgsConstructor

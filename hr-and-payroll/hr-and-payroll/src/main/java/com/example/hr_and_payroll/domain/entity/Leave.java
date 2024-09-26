@@ -1,15 +1,12 @@
 package com.example.hr_and_payroll.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
-import java.time.Period;
 
 @Getter
 @Setter
@@ -47,15 +44,14 @@ public class Leave extends BaseDomain{
         this.status = status;
     }
 
-    public Leave(LocalDate startDate, LocalDate endDate, long totalDays) {
+    public Leave(int id,Employee employee,LeaveType leaveType, LocalDate startDate, LocalDate endDate, long totalDays, LeaveStatus status) {
+        this.id = id;
+        this.employee = employee;
+        this.leaveType = leaveType;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalDays = totalDays;
+        this.status = status;
     }
 
-    /*public void calculateTotalDays() {
-        if (startDate != null && endDate != null) {
-            this.totalDays = Period.between(startDate, endDate).getDays() + 1;
-        }
-    }*/
 }

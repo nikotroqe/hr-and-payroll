@@ -3,7 +3,6 @@ package com.example.hr_and_payroll.service.impl;
 import com.example.hr_and_payroll.domain.dto.OvertimeDTO;
 
 import com.example.hr_and_payroll.domain.entity.Overtime;
-import com.example.hr_and_payroll.domain.entity.OvertimeStatus;
 import com.example.hr_and_payroll.exception.ResourceNotFoundException;
 import com.example.hr_and_payroll.mapper.OvertimeMapper;
 import com.example.hr_and_payroll.repository.OvertimeRepository;
@@ -21,7 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OvertimeServiceImpl implements OvertimeService {
 
-    /*private final OvertimeRepository overtimeRepository;
+    private final OvertimeRepository overtimeRepository;
 
     public OvertimeDTO createOvertime(OvertimeDTO overtimeDTO) {
         Overtime overtime = OvertimeMapper.mapToOvertime(overtimeDTO);
@@ -46,7 +45,7 @@ public class OvertimeServiceImpl implements OvertimeService {
         Overtime overtime = overtimeRepository.findById(overtimeId).orElseThrow(
                 () -> new ResourceNotFoundException("Overtime is not exist with given id: " + overtimeId)
         );
-        overtime.setRequestedOvertimeHours(updatedOvertime.getRequestedOvertimeHours());
+        overtime.setOvertimeHours(updatedOvertime.getOvertimeHours());
 
         Overtime updatedOvertimeObj = overtimeRepository.save(overtime);
 
@@ -59,7 +58,7 @@ public class OvertimeServiceImpl implements OvertimeService {
                 () -> new ResourceNotFoundException("Overtime is not exist with given id: " + overtimeId)
         );
         overtimeRepository.deleteById(overtimeId);
-    }*/
+    }
 
     /*public Overtime approveOvertime(Integer overtimeId) {
         Overtime overtime = overtimeRepository.findById(overtimeId)

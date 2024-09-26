@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/api/overtime")
 public class OvertimeController {
 
-    /*private final OvertimeService overtimeService;
+    private final OvertimeService overtimeService;
 
     @PostMapping("/create")
     public ResponseEntity<OvertimeDTO> createOvertime(@RequestBody OvertimeDTO overtimeDTO){
@@ -51,5 +51,5 @@ public class OvertimeController {
     public ResponseEntity<String> deleteOvertime(@PathVariable("id") Integer overtimeId){
         overtimeService.deleteOvertime(overtimeId);
         return ResponseEntity.ok("Overtime deleted successfully!.");
-    }*/
+    }
 }
