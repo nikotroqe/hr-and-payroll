@@ -4,8 +4,6 @@ import com.example.hr_and_payroll.domain.dto.AttendanceDTO;
 import com.example.hr_and_payroll.domain.entity.Attendance;
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 public interface AttendanceService {

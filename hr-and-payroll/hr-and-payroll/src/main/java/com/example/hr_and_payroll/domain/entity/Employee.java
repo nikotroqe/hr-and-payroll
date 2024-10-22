@@ -49,10 +49,6 @@ public class Employee extends  BaseDomain {
     @JsonBackReference
     private List<Attendance> attendances = new ArrayList<>();
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
-    @JsonBackReference
-    private List<Overtime> overtimes = new ArrayList<>();
-
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy="employee")
     @JsonBackReference
     private Leave leave;

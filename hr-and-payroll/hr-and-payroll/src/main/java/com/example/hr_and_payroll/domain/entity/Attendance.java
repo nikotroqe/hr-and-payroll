@@ -1,13 +1,17 @@
 package com.example.hr_and_payroll.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.JoinColumn;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,28 +39,31 @@ public class Attendance extends BaseDomain{
     @Column(name = "hoursWorked")
     private double hoursWorked;
 
+    @Column(name = "overtime_hours")
+    private Duration overtimeHours;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AttendanceStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Overtime overtime;
 
-    public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, AttendanceStatus status) {
+    public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, Duration overtimeHours, AttendanceStatus status) {
         this.employee = employee;
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
         this.status = status;
+        this.overtimeHours = overtimeHours;
 
     }
 
-    public Attendance(LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked) {
+    public Attendance(LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, Duration overtimeHours) {
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
+        this.overtimeHours = overtimeHours;
     }
 
 }
