@@ -13,8 +13,7 @@ public class AttendanceMapper {
                 attendance.getDate(),
                 attendance.getCheckInTime(),
                 attendance.getCheckOutTime(),
-                attendance.getHoursWorked(),
-                attendance.getOvertimeHours()
+                attendance.getHoursWorked()
         );
     }
     public static Attendance mapToAttendance(AttendanceDTO attendanceDTO){
@@ -24,7 +23,6 @@ public class AttendanceMapper {
                 attendanceDTO.getCheckInTime(),
                 attendanceDTO.getCheckOutTime(),
                 attendanceDTO.getHoursWorked(),
-                attendanceDTO.getOvertimeHours(),
                 AttendanceStatus.PRESENT
         );
     }

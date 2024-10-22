@@ -39,31 +39,28 @@ public class Attendance extends BaseDomain{
     @Column(name = "hoursWorked")
     private double hoursWorked;
 
-    @Column(name = "overtime_hours")
-    private Duration overtimeHours;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AttendanceStatus status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Overtime overtime;
 
-    public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, Duration overtimeHours, AttendanceStatus status) {
+    public Attendance(Employee employee, LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, AttendanceStatus status) {
         this.employee = employee;
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
         this.status = status;
-        this.overtimeHours = overtimeHours;
 
     }
 
-    public Attendance(LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, Duration overtimeHours) {
+    public Attendance(LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked) {
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
-        this.overtimeHours = overtimeHours;
     }
 
 }

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -21,16 +19,14 @@ public class AttendanceDTO {
     private LocalTime checkInTime;
     private LocalTime checkOutTime;
     private double hoursWorked;
-    private Duration overtimeHours;
 
 
-    public AttendanceDTO(int id, int employeeId,LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked, Duration overtimeHours) {
+    public AttendanceDTO(int id, int employeeId,LocalDate date, LocalTime checkInTime, LocalTime checkOutTime, double hoursWorked) {
         this.id = id;
         this.employeeId = employeeId;
         this.date = date;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.hoursWorked = hoursWorked;
-        this.overtimeHours = overtimeHours;
     }
 }
